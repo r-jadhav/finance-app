@@ -5,7 +5,7 @@ import image from '../assets/img/app-bg.jpg'
 // import PhoneInput from "react-native-phone-number-input";
 
 
-const LoginPage = ({navigation}) => {
+const Otp = ({navigation}) => {
   const [text, onChangeText] = React.useState("enter number");
   const [number, onChangeNumber] = React.useState(null);
 
@@ -23,18 +23,21 @@ const LoginPage = ({navigation}) => {
 
             <View style={[styles.Box,{flex:2}]}>
               <View style={{flexDirection:'column',marginTop:'15%',justifyContent:'space-between'}}>
-                <Text style={styles.Heading}>Enter Your Mobile Number</Text>
-                  <TextInput
-                      style={styles.input}
-                      keyboardType = 'numeric'
-                      onChangeText={onChangeNumber}
-                      value={number}
-                      placeholder="+91"
-                     
-                    />
+                <Text style={styles.Heading}>Enter OTP sent to 9884098840</Text>
+                <TextInput
+                    style={styles.input}
+                    keyboardType = 'numeric'
+                    onChangeText={onChangeNumber}
+                    value={number}
+                    placeholder="Enter 6 Digit OTP"      
+                />
+                <View style={styles.resend}>
+                        <Text style={{color:'#fff'}}>Resend OTP</Text>
+                        <Text style={{color:'#fff'}}>Edit Number</Text>
+                    </View>
                   <TouchableOpacity style={styles.button}>
                       <Text style={{color:'#fff',fontSize:16}}
-                      onPress={() => navigation.navigate("Otp")}>Get OTP</Text>
+                      onPress={() => navigation.navigate("Contact")}>Submit</Text>
                   </TouchableOpacity>
               </View>
             </View>
@@ -44,7 +47,7 @@ const LoginPage = ({navigation}) => {
   )
 }
 
-export default LoginPage
+export default Otp
 
 const styles = StyleSheet.create({
     bgimg: {
@@ -102,8 +105,13 @@ const styles = StyleSheet.create({
           borderRadius:5,
           backgroundColor:'transparent',
           borderColor:'#554994',
-          marginBottom:20
+          marginBottom:5
 
         },
+        resend:{
+            flexDirection:'row',
+            justifyContent:'space-between',
+            marginBottom:20,
+        }
      
 })

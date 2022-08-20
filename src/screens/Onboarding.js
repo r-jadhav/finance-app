@@ -1,7 +1,8 @@
 import { View, Text, Image, StyleSheet, Button, Alert,Separator  } from 'react-native'
 import React from 'react'
+import CircleButton from '../components/CircleButton';
 
-const Onboarding = () => {
+const Onboarding = ({navigation}) => {
     const Separator = () => (
         <View style={styles.separator} />
       );
@@ -17,11 +18,12 @@ const Onboarding = () => {
       <Text style={{fontSize:24,color:'#fff',marginBottom:10}}>Quick Loan</Text>
       <Text style={{color:'#fff',width:'75%',textAlign:'center'}}>You can now apply for Loan from the comfort of your homes with instant approval.</Text>
         <View style={styles.continueBtn}>
-            <Button
+            {/* <Button
                 title="Continue"
                 color="#554994"
-                onPress={() => Alert.alert('Simple Button pressed')}
-            />
+                onPress={() => navigation.navigate('Login')}
+            /> */}
+        <CircleButton onPress={()=>navigation.navigate('Login')}></CircleButton>
         </View>
     </View>
   )
@@ -43,7 +45,8 @@ const styles = StyleSheet.create({
         alignSelf:'center',
     },
     continueBtn:{
-      padding:20
+      padding:20,
+      alignSelf:'flex-end',
     },
     separator: {
         borderBottomColor: '#737373',
