@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity, Pressable, ImageBackground } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, PreButtonssable, ImageBackground } from 'react-native'
 import { TextInput } from 'react-native-paper';
-import image from '../assets/img/app-bg.jpg'
-// import PhoneInput from "react-native-phone-number-input";
+import Button from "../components/Button";
 
 
 const LoginPage = ({navigation}) => {
@@ -10,36 +9,42 @@ const LoginPage = ({navigation}) => {
   const [number, onChangeNumber] = React.useState(null);
 
   return (
-    <View style={{flex:1,flexDirection:'column'}}>
-        <ImageBackground source={image} resizeMode="cover" style={styles.bgimg}>
+    <View style={{flex:1,flexDirection:'column',backgroundColor:'#fff'}}>
+        {/* <ImageBackground source={image} resizeMode="cover" style={styles.bgimg}> */}
             <View style={[styles.section_logo,{flex:3}]}>
                 <Image
                     style={styles.logo}
-                    source={require('../assets/img/logo-final.png')}
+                    source={require('../assets/img/logo.png')}
                 />
-                <Text style={[styles.company_name,{}]}>Finance</Text>
+                <Text style={[styles.company_name,{}]}>Finedict</Text>
             </View>
 
 
             <View style={[styles.Box,{flex:2}]}>
               <View style={{flexDirection:'column',marginTop:'15%',justifyContent:'space-between'}}>
                 <Text style={styles.Heading}>Enter Your Mobile Number</Text>
-                  <TextInput
+                  {/* <TextInput
                       style={styles.input}
                       keyboardType = 'numeric'
                       onChangeText={onChangeNumber}
                       value={number}
                       placeholder="+91"
                      
+                    /> */}
+
+                    <TextInput
+                      style={{backgroundColor:'#fff',width:'100%',alignSelf:'center',height:45,borderRadius:5,marginVertical:20}}
+                      keyboardType = 'numeric'
+                      onChangeText={onChangeNumber}
+                      value={number}
+                      placeholder="+91"
+                     
                     />
-                  <TouchableOpacity style={styles.button}>
-                      <Text style={{color:'#fff',fontSize:16}}
-                      onPress={() => navigation.navigate("Otp")}>Get OTP</Text>
-                  </TouchableOpacity>
+                  <Button style={styles.button} onPress={()=>navigation.navigate('Otp')} title="Get OTP"></Button>
               </View>
             </View>
 
-        </ImageBackground>
+        {/* </ImageBackground> */}
     </View>
   )
 }
@@ -57,8 +62,8 @@ const styles = StyleSheet.create({
         justifyContent:'center'
       },
       logo:{
-        width:80,
-        height:80
+        width:100,
+        height:100
       },
       company_name:{
         fontWeight:'bold',

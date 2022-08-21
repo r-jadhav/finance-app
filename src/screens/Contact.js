@@ -8,7 +8,7 @@ const Contact = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-         <View style={styles.header}>
+         <View style={[styles.header,{backgroundColor:'#6986b3'}]}>
           <Text style={{textAlign:'center',fontSize:20,fontWeight:'700',color:'#fff'}}>Contact Details</Text>
         </View>
         <View style={styles.contactForm}>
@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
   },
   header:{
     flex:2,
-    backgroundColor:'#6986b3',
     width:'100%',
     borderBottomEndRadius:15,
     borderBottomLeftRadius:15,
