@@ -13,7 +13,7 @@ const Contact = ({navigation}) => {
         </View>
         <View style={styles.contactForm}>
             <FTextInput placeholder="Email" ></FTextInput>
-            <FTextInput style={{}} placeholder="Name" ></FTextInput>
+            <FTextInput style={{}} placeholder="Principal amount" ></FTextInput>
             <FTextInput style={{}} placeholder="Contact Number" ></FTextInput>
             <FTextInput style={{}} placeholder="Monthly Salary" ></FTextInput>
             <FTextInput style={{}} placeholder="Address" ></FTextInput>

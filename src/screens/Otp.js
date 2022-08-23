@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity, Pressable, ImageBackground } from 'react-native'
 import { TextInput } from 'react-native-paper';
-import image from '../assets/img/app-bg.jpg'
 import Button from "../components/Button";
 
 const Otp = ({navigation}) => {
