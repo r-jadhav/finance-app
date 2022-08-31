@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity, PreButtonssable, ImageBackground } from 'react-native'
-import { TextInput } from 'react-native-paper';
+import { StyleSheet, Text, View, Image, TextInput, PreButtonssable, ImageBackground } from 'react-native'
 import Button from "../components/Button";
-
+import colors from '../constant/colors'
+import CircleButton from '../components/CircleButton';
 
 const LoginPage = ({navigation}) => {
   const [text, onChangeText] = React.useState("enter number");
@@ -13,34 +13,34 @@ const LoginPage = ({navigation}) => {
         {/* <ImageBackground source={image} resizeMode="cover" style={styles.bgimg}> */}
             <View style={[styles.section_logo,{flex:3}]}>
                 <Image
+                resizeMode="contain"
                     style={styles.logo}
-                    source={require('../assets/img/logo.png')}
+                    source={require('../assets/img/finedict-logo.png')}
                 />
-                <Text style={[styles.company_name,{}]}>Finedict</Text>
             </View>
 
 
-            <View style={[styles.Box,{flex:2}]}>
+            <View style={[styles.Box,{flex:2.5}]}>
               <View style={{flexDirection:'column',marginTop:'15%',justifyContent:'space-between'}}>
                 <Text style={styles.Heading}>Enter Your Mobile Number</Text>
-                  {/* <TextInput
-                      style={styles.input}
-                      keyboardType = 'numeric'
-                      onChangeText={onChangeNumber}
-                      value={number}
-                      placeholder="+91"
-                     
-                    /> */}
-
+                <View style={{backgroundColor:'#fff',
+                      width:'100%',
+                      alignSelf:'center',
+                      height:55,
+                      borderRadius:45,
+                      marginVertical:20,flexDirection:'row',alignItems:'center',paddingHorizontal:10}}>
+                    <Text style={{fontFamily:'Poppins-Regular',color:'#aaa',fontSize:16}}>+91</Text>
                     <TextInput
-                      style={{backgroundColor:'#fff',width:'100%',alignSelf:'center',height:45,borderRadius:5,marginVertical:20}}
+                      
                       keyboardType = 'numeric'
                       onChangeText={onChangeNumber}
                       value={number}
-                      placeholder="+91"
+                      style={{width:'87%',marginLeft:10,fontFamily:'Poppins-Regular',color:'#aaa',fontSize:16}}
                      
                     />
-                  <Button style={styles.button} onPress={()=>navigation.navigate('Otp')} title="Get OTP"></Button>
+                </View>
+                    
+                    <CircleButton stylesB={{minWidth:70,height:70,borderRadius:70,alignSelf:'center'}} onPress={()=>navigation.navigate('Otp')}></CircleButton>
               </View>
             </View>
 
@@ -62,8 +62,9 @@ const styles = StyleSheet.create({
         justifyContent:'center'
       },
       logo:{
-        width:100,
-        height:100
+        width:300,
+        height:150,
+        resizeMode:'contain'
       },
       company_name:{
         fontWeight:'bold',
@@ -86,19 +87,19 @@ const styles = StyleSheet.create({
       }, 
         Box:{
           flex:1,
-          backgroundColor:'#6986b3',
+          backgroundColor:colors.primary,
           height:'50%',
           width:'100%',
-          borderTopEndRadius:30,
-          borderTopLeftRadius:30,
+          borderTopEndRadius:60,
+          borderTopLeftRadius:60,
           padding:'10%',
         },
         Heading:{
-          fontWeight:'bold',
-          fontSize:20,
+          fontSize:18,
           color:'#000',
           marginBottom:10,
-          color:'#fff'
+          color:'#fff',
+          fontFamily:'Poppins-Medium'
         },
         input: {
           height: 20,

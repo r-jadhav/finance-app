@@ -10,6 +10,7 @@ const FTextInput = ({placeholder,onchange,style}) => {
       mode="flat"
       label={placeholder}
       placeholder=""
+      onChangeText={onchange}
     style={[{backgroundColor:'transparent',marginTop:20},style]}
     />
       </>

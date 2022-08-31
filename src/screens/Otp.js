@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity, Pressable, ImageBackground } from 'react-native'
-import { TextInput } from 'react-native-paper';
+import { TextInput,StyleSheet, Text, View, Image, TouchableOpacity, Pressable, ImageBackground } from 'react-native'
+
 import Button from "../components/Button";
+import CircleButton from "../components/CircleButton";
+import colors from "../constant/colors";
 
 const Otp = ({navigation}) => {
   const [text, onChangeText] = React.useState("enter number");
@@ -13,13 +15,13 @@ const Otp = ({navigation}) => {
             <View style={[styles.section_logo,{flex:3}]}>
                 <Image
                     style={styles.logo}
-                    source={require('../assets/img/logo.png')}
+                    source={require('../assets/img/finedict-logo.png')}
                 />
-                <Text style={[styles.company_name,{}]}>Finedict</Text>
+              
             </View>
 
 
-            <View style={[styles.Box,{flex:2}]}>
+            <View style={[styles.Box,{flex:2.5}]}>
               <View style={{flexDirection:'column',marginTop:'15%',justifyContent:'space-between'}}>
                 <Text style={styles.Heading}>Enter OTP sent to 9884098840</Text>
                 {/* <TextInput
@@ -30,7 +32,12 @@ const Otp = ({navigation}) => {
                     placeholder="Enter 6 Digit OTP"      
                 /> */}
                 <TextInput
-                      style={{backgroundColor:'#fff',width:'100%',alignSelf:'center',height:45,borderRadius:5,marginTop:20}}
+                      style={{backgroundColor:'#fff',
+                      width:'100%',
+                      alignSelf:'center',
+                      height:55,
+                      borderRadius:25,
+                      marginVertical:20,paddingLeft:15,fontFamily:'Poppins-Regular',color:'#aaa',fontSize:16}}
                       keyboardType = 'numeric'
                       onChangeText={onChangeNumber}
                       value={number}
@@ -38,11 +45,12 @@ const Otp = ({navigation}) => {
                      
                     />
                 <View style={styles.resend}>
-                        <Text style={{color:'#fff'}}>Resend OTP</Text>
-                        <Text style={{color:'#fff'}}>Edit Number</Text>
+                        <Text style={{color:'#fff',fontFamily:'Poppins-Medium',fontSize:16}}>Resend OTP</Text>
+                        <Text style={{color:'#fff',fontFamily:'Poppins-Medium',fontSize:16}}>Edit Number</Text>
                     </View>
 
-                <Button style={styles.button} onPress={()=>navigation.navigate('Home')} title="Submit"></Button>
+                  
+                    <CircleButton title="Get Started" onPress={()=>navigation.navigate('Home')}></CircleButton>
 
               </View>
             </View>
@@ -65,8 +73,9 @@ const styles = StyleSheet.create({
         justifyContent:'center'
       },
       logo:{
-        width:100,
-        height:100
+        width:300,
+        height:150,
+        resizeMode:'contain'
       },
       company_name:{
         fontWeight:'bold',
@@ -89,19 +98,19 @@ const styles = StyleSheet.create({
       }, 
         Box:{
           flex:1,
-          backgroundColor:'#6986b3',
+          backgroundColor:colors.primary,
           height:'50%',
           width:'100%',
-          borderTopEndRadius:30,
-          borderTopLeftRadius:30,
+          borderTopEndRadius:60,
+          borderTopLeftRadius:60,
           padding:'10%',
         },
         Heading:{
-          fontWeight:'bold',
-          fontSize:20,
+          fontSize:18,
           color:'#000',
           marginBottom:10,
-          color:'#fff'
+          color:'#fff',
+          fontFamily:'Poppins-Medium'
         },
         input: {
           height: 20,

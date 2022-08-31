@@ -1,6 +1,8 @@
 import { View, Text, Image, StyleSheet, Button, Alert,Separator  } from 'react-native'
 import React from 'react'
 import CircleButton from '../components/CircleButton';
+import colors from '../constant/colors';
+import Lottie from 'lottie-react-native';
 
 const Onboarding = ({navigation}) => {
     const Separator = () => (
@@ -8,23 +10,29 @@ const Onboarding = ({navigation}) => {
       );
   return (
     <View style={styles.container}>
-        <View>
-            <Image
-                style={styles.onboardingLogo}
-                source={require('../assets/img/onboardingImg.png')}
-            />
-        </View>
-        <Separator />
-      <Text style={{fontSize:24,color:'#fff',marginBottom:10}}>Quick Loan</Text>
-      <Text style={{color:'#fff',width:'75%',textAlign:'center'}}>You can now apply for Loan from the comfort of your homes with instant approval.</Text>
-        <View style={styles.continueBtn}>
-            {/* <Button
-                title="Continue"
-                color="#554994"
-                onPress={() => navigation.navigate('Login')}
-            /> */}
-        <CircleButton onPress={()=>navigation.navigate('Login')}></CircleButton>
-        </View>
+    <View style={{
+        width:250,
+        height:250,
+        borderRadius:250,
+        borderColor:'#fff',
+        borderWidth:1,
+        position:'absolute',top:'-5%',left:'-10%'
+    }}></View>
+    <View style={{
+        width:250,
+        height:250,
+        borderRadius:250,
+        borderColor:'#fff',
+        borderWidth:1,
+        position:'absolute',top:'10%',left:'-30%'
+    }}></View> 
+    <Lottie style={{position:'absolute',top:'-30%'}} source={require('../assets/star.json')} speed={1.5} loop={true} autoPlay  />
+    <Text style={{fontSize:40,color:'#fff',marginBottom:10,fontFamily:'Poppins-SemiBold'}}>Quick Loan</Text>
+    <Text style={{color:'#fff',width:'85%',textAlign:'left',fontSize:20,fontFamily:'Poppins-Regular'}}>You can now apply for Loan from the comfort of your homes with instant approval.</Text>
+    <CircleButton 
+                    stylesB={{minWidth:70,height:70,borderRadius:70,alignSelf:'center'}} 
+                    onPress={()=>navigation.navigate('Login')}>
+                    </CircleButton>     
     </View>
   )
 }
@@ -34,10 +42,11 @@ export default Onboarding
 const styles = StyleSheet.create({ 
     container:{
         flex:1,
-        justifyContent:'center',
-        alignContent:'center',
-        alignItems:'center',
-        backgroundColor:'#6986b3'       
+        justifyContent:'flex-end',
+       
+        alignItems:'flex-start',
+        backgroundColor:colors.primary,
+        padding:30
     },
     onboardingLogo:{
         width:350,
