@@ -5,6 +5,8 @@ import Button from '../components/Button'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from '../components/CarouselCardItem'
 import ION from 'react-native-vector-icons/Ionicons'
+import LinearGradient from 'react-native-linear-gradient';
+
 const Home = ({navigation}) => {
   const [index, setIndex] = React.useState(0)
   const isCarousel = React.useRef(null)
@@ -27,6 +29,14 @@ const Home = ({navigation}) => {
   ];
   return (
     <View style={{flex:1,backgroundColor:'#fff',}}>
+
+
+
+          <LinearGradient
+              colors={['#6a32a1','#ce49bfad'] }
+              start={{x: 0.3, y: 0.25}} end={{x: 0.5, y: 1.0}}
+              style={styles.linearGradient}>
+
        <View style={styles.header}>
           <View style={{flexDirection:'row'}}>
           <Image
@@ -38,11 +48,15 @@ const Home = ({navigation}) => {
             <Text style={{fontSize:19,color:'#fff',fontFamily:'Poppins-Regular'}}>Finedict</Text>
           </View>
           </View>
-          <ION onPress={()=>navigation.navigate('Menu')} name="menu" size={30} color="#fff"></ION>
+          <ION name="menu" color="#fff" size={30} onPress={()=>navigation.navigate('Menu')}></ION>
         </View>
+
+        </LinearGradient>
+
+
         <ScrollView>
        
-
+        {/* <ION onPress={()=>navigation.navigate('Menu')} name="menu" size={30} color="#fff"></ION> */}
 
        <View style={{padding:10}}>
        <View style={{ backgroundColor: '#fff',
@@ -79,7 +93,7 @@ const Home = ({navigation}) => {
       />
 
         </View>
-        <Text style={[styles.heading,{marginTop:'-2%'}]}>Our Motto</Text>
+        {/* <Text style={[styles.heading,{marginTop:'-2%'}]}>Our Motto</Text> */}
         <View style={{flexDirection:'row',justifyContent:'space-between'}}>
           <View style={styles.stepcard}>
             <Image
@@ -131,9 +145,16 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor:'#f5f5f5'
       },
+      linearGradient: {
+        borderBottomRightRadius: 35,
+        borderBottomLeftRadius: 35,
+        backgroundColor:colors.primary,
+
+      },
+
       header:{
         flexDirection:'row',
-        backgroundColor:colors.primary,
+        // backgroundColor:colors.primary,
         width:'100%',
         borderBottomEndRadius:35,
         borderBottomLeftRadius:35,
@@ -161,7 +182,6 @@ const styles = StyleSheet.create({
       },
       stepcard:{
         width:'30%',
-        marginVertical:10,
         padding:10,
         borderWidth:1,
         marginHorizontal:5,
@@ -170,27 +190,28 @@ const styles = StyleSheet.create({
         borderRadius:7,
         shadowColor: "#f5f5f5",
         shadowOffset: {
-        width: 0,
-        height: 1
+        // width: 0,
+        // height: 1
         },
         shadowOpacity: 0.25,
         shadowRadius: 2,
         elevation:5,
-        minHeight:150
+        // minHeight:150
         
       },
       logo:{
-        width:50,
-        height:50,
+        width:40,
+        height:40,
         marginRight:20,
         marginTop:5
       },
       stepText:{fontSize:15,
-        color:'#000',fontFamily:'Poppins-SemiBold',marginTop:10},
+        color:'#000',fontFamily:'Poppins-SemiBold',marginTop:10
+      },
         heading:{
-          fontSize:20,
-        color:'#000',fontFamily:'Poppins-Italic',marginTop:20,
-        textDecorationLine:'underline',
+        fontSize:20,
+        color:'#000',fontFamily:'Poppins-SemiBold',marginTop:20,
+        // textDecorationLine:'underline',
         textAlign:'center',
         marginBottom:10
         },
@@ -200,5 +221,6 @@ const styles = StyleSheet.create({
           resizeMode:'contain',
           borderRadius:15,
           elevation:3
-        }
+        },
+     
 })

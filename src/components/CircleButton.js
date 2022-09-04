@@ -6,11 +6,11 @@ import colors from '../constant/colors'
 const CircleButton = ({onPress,stylesB,title}) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <View  style={[{minWidth:180,height:50,borderRadius:15,
+      <View style={[{minWidth:180,height:50,borderRadius:5,
       backgroundColor:'#fff',flexDirection:'row',alignItems:'center',justifyContent:'center',
       alignSelf:'flex-start',marginTop:20,elevation:4},stylesB]}>
         <Text style={{fontSize:18,fontFamily:'Poppins-Medium',color:colors.primary}}>{title}</Text>
-          <ANT size={25} name="arrowright" color={colors.primary}></ANT>
+          {/* <ANT size={25} name="arrowright" color={colors.primary}></ANT> */}
           
             {/* <Image
                 style={styles.arrow}
@@ -24,10 +24,10 @@ const CircleButton = ({onPress,stylesB,title}) => {
 export default CircleButton
 
 const styles = StyleSheet.create({
-    arrow:{
-        width:30,
-        height:30
-    }
+    // arrow:{
+    //     width:30,
+    //     height:30
+    // }
 })
 
 // 389AB9

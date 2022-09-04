@@ -33,10 +33,6 @@ const App = () => {
     <>
       
       <SafeAreaView style={styles.container}>
-       
-        
-
-          
           <View style={[styles.header,{backgroundColor:colors.primary}]}>
             <TouchableOpacity onPress={()=>navigation.goBack()}>
                 <EvilIcons color="#fff" size={30} name='arrowleft'></EvilIcons>
