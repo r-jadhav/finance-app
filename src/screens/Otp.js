@@ -4,11 +4,14 @@ import LinearGradient from 'react-native-linear-gradient';
 import Button from "../components/Button";
 import CircleButton from "../components/CircleButton";
 import colors from "../constant/colors";
+import i18n from '../i18n'
 
 const Otp = ({navigation}) => {
   const [text, onChangeText] = React.useState("enter number");
   const [number, onChangeNumber] = React.useState(null);
-
+const editnumber = () =>{
+  navigation.goBack()
+}
   return (
     <View style={{flex:1,flexDirection:'column',backgroundColor:'#fff'}}>
         {/* <ImageBackground source={image} resizeMode="cover" style={styles.bgimg}> */}
@@ -29,7 +32,7 @@ const Otp = ({navigation}) => {
                 style={styles.Box}>
 
               <View style={{flexDirection:'column',marginTop:'10%',justifyContent:'space-between'}}>
-                <Text style={styles.Heading}>Enter OTP sent to 9884098840</Text>
+                <Text style={styles.Heading}>{i18n.t('Enter_OTP_sent_to')} 9884098840</Text>
                 <TextInput
                       style={{backgroundColor:'#fff',
                       width:'100%',
@@ -39,15 +42,17 @@ const Otp = ({navigation}) => {
                       keyboardType = 'numeric'
                       onChangeText={onChangeNumber}
                       value={number}
-                      placeholder="Enter 4 Digit OTP"
+                      placeholder={i18n.t('Enter_4_Digit_OTP')}
                      
                     />
                 <View style={styles.resend}>
-                        <Text style={{color:'#fff',fontFamily:'Poppins-Medium',fontSize:16}}>Resend OTP</Text>
-                        <Text style={{color:'#fff',fontFamily:'Poppins-Medium',fontSize:16}}>Edit Number</Text>
+                        <Text style={{color:'#fff',fontFamily:'Poppins-Medium',fontSize:16}}>{i18n.t('Resend_OTP')}</Text>
+                        <TouchableOpacity onPress={()=>{editnumber()}}>
+                        <Text style={{color:'#fff',fontFamily:'Poppins-Medium',fontSize:16}}>{i18n.t('Edit_Number')}</Text>
+                          </TouchableOpacity>
                     </View>
 
-                    <CircleButton title="Submit"
+                    <CircleButton title={i18n.t('Submit')}
                     stylesB={{minWidth:'100%',height:45,}} 
                     onPress={()=>navigation.navigate('Home')}>
                   </CircleButton> 

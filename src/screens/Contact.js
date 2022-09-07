@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity,ScrollView,SafeAreaView  } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity,ActivityIndicator,SafeAreaView, Alert  } from 'react-native'
 import FTextInput from '../components/FTextInput'
 import  Button  from '../components/Button';
 import colors from '../constant/colors'
@@ -9,26 +9,59 @@ import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 
 import CustomInput from './CustomInput'
+import i18n from '../i18n';
 
 
 const signUpValidationSchema = yup.object().shape({
-  principal: yup
+  name: yup
     .string()
-    .required('Full name is required'),
+    .required(i18n.t('Full_name_is_required')),
     contact: yup
     .string()
-    .required('Phone number is required'),
+    .required(i18n.t('Phone_number_is_required')), 
     email: yup
     .string()
-    .required('Email is required'),
+    .required(i18n.t('Email_is_required')),
     salary: yup
     .string()
-    .required('Email is required'),
+    .required(i18n.t('Salary_is_required')),
     address: yup
     .string()
-    .required('Email is required')
+    .required(i18n.t('Address_is_required'))
 })
-const App = () => {
+const App = ({navigation}) => {
+  const [loader, setLaoder] = useState(false)
+  const createPost = (values)=> {
+    setLaoder(true)
+    console.log(values)
+    axios
+    .post('https://finedict.com:3003/addEnquiry'
+    , {
+      enq_email:values.email,
+      enq_name:values.name,
+      enq_contact_number:values.contact,
+      enq_monthly_salary:values.salary,
+      enq_location:values.address,
+      enq_loan_amt:values.loanamt,
+      created_date_time:new Date(),
+    })
+    .then((response) => {
+      if(response.status == 200){
+        Alert.alert('',i18n.t('thanks'))
+       
+      navigation.goBack()
+
+      }else{
+        Alert.alert('',i18n.t('error'))
+
+        navigation.goBack()
+      }
+      
+      
+    });
+
+  }
+
   return (
     <>
       
@@ -38,65 +71,67 @@ const App = () => {
                 <EvilIcons color="#fff" size={30} name='arrowleft'></EvilIcons>
             </TouchableOpacity>
           <Text style={{textAlign:'center',fontSize:25,color:'#fff',
-          fontFamily:'Poppins-SemiBold'}}>Contact</Text>
-          <Text></Text>
+          fontFamily:'Poppins-SemiBold'}}>{i18n.t('Contact')}</Text>
+          <Text></Text> 
         </View>
         <View style={styles.contactForm}>
         <Formik
             validationSchema={signUpValidationSchema}
             initialValues={{
-              principal: '',
+              name: '',
               email: '',
               contact: '',
               salary: '',
               address: '',
               loanamt:''
             }}
-            onSubmit={values => console.log(values)}
+            onSubmit={values => createPost(values)}
           >
             {({ handleSubmit, isValid, values }) => (
               <>
+              <Field
+                  component={CustomInput}
+                  name="name"
+                  placeholder={i18n.t('Name')}
+                />
                 <Field
                   component={CustomInput}
                   name="email"
-                  placeholder="Email"
+                  placeholder={i18n.t('Email')}
                 />
-                <Field
-                  component={CustomInput}
-                  name="principal"
-                  placeholder="Principal amount"
-                />
+                
                 <Field
                   component={CustomInput}
                   name="contact"
-                  placeholder="Contact Number"
+                  placeholder={i18n.t('Contact_Number')}
                   keyboardType="numeric"
                 />
                 <Field
                   component={CustomInput}
                   name="salary"
-                  placeholder="Monthly Salary"
+                  placeholder={i18n.t('Monthly_Salary')}
                   
                 />
                 <Field
                   component={CustomInput}
                   name="address"
-                  placeholder="Address"
+                  placeholder={i18n.t('Address')}
                   
                 />
               <Field
                   component={CustomInput}
                   name="loanamt"
-                  placeholder="Require Loan Amount"
+                  placeholder={i18n.t('Require_Loan_Amount')}
                   
                 />
-
-                <Button 
+                {loader == true ? (<ActivityIndicator size="large" color={colors.primary}></ActivityIndicator>) :  (<Button 
                 style={{marginTop:30}}
                   onPress={handleSubmit}
-                  title="SUBMIT"
+                  title={i18n.t('SUBMIT')}
+                  
                   disabled={!isValid || values.email === ''}
-                />
+                />)}
+                
               </>
             )}
           </Formik>

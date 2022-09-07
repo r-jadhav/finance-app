@@ -1,24 +1,74 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image,ScrollView, TouchableOpacity  } from 'react-native'
+import { StyleSheet, Text, View, Image,ScrollView, TouchableOpacity,Platform ,Alert } from 'react-native'
 import FTextInput from '../components/FTextInput'
 import  Button  from '../components/Button';
 import colors from '../constant/colors'
 import EvilIcons from 'react-native-vector-icons/AntDesign'
 import MI from 'react-native-vector-icons/MaterialIcons'
+import LinearGradient from 'react-native-linear-gradient';
+import i18n from '../i18n'
+import Share from 'react-native-share'
+import InAppReview from 'react-native-in-app-review';
+
 const Menu = ({navigation}) => {
     const iconSize = 30
     const colorIcon = colors.primary
+    const onShare = async () => {
+      var link = '';
+      if(Platform.OS == 'ios'){
+        link = 'https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en';
+      }else{
+        link = 'https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en'
+      }
+      try {
+        const result = await Share.open({
+         title: 'App link',
+          message: 'Please install this app from store \n', 
+          url: link
+              });
+              if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                  // shared with activity type of result.activityType
+                } else {
+                  // shared
+                }
+              } else if (result.action === Share.dismissedAction) {
+                
+              }
+            } catch (error) {
+            }
+    };
+    const RateNow = async() =>{
+      if(InAppReview.isAvailable() == false){
+        Alert.alert('','Unavailable')
+      }else{
+        InAppReview.RequestInAppReview()
+        .then((hasFlowFinishedSuccessfully) => {
+          if (hasFlowFinishedSuccessfully) {
+            Alert.alert('','Thanks for Rating app')
+          }
+        })
+        .catch((error) => {
+          Alert.alert('','Unavailable')
+          console.log(error);
+        }); 
+      }
+     
+    }
   return (
     <View style={styles.container}>
       <ScrollView>
-         <View style={[styles.header,{backgroundColor:colors.primary}]}>
+      <LinearGradient
+              colors={['#6a32a1','#ce49bfad'] }
+              start={{x: 0.3, y: 0.25}} end={{x: 0.5, y: 1.0}}
+               style={[styles.header,{backgroundColor:colors.primary}]}>
             <TouchableOpacity onPress={()=>navigation.goBack()}>
                 <EvilIcons color="#fff" size={30} name='arrowleft'></EvilIcons>
-            </TouchableOpacity>
+            </TouchableOpacity> 
           <Text style={{textAlign:'center',fontSize:25,color:'#fff',
-          fontFamily:'Poppins-SemiBold'}}>Menu</Text>
+          fontFamily:'Poppins-SemiBold'}}>{i18n.t('Menu')}</Text>
           <Text></Text>
-        </View>
+        </LinearGradient>
         <View style={styles.contactForm}>
            <View style={{flexDirection:'row',alignItems:'center',marginVertical:20}}>
              <Image style={{width:80,height:80}} source={require('../assets/img/user.png')}></Image>
@@ -27,29 +77,33 @@ const Menu = ({navigation}) => {
                 <Text style={{fontFamily:'Poppins-Regular',color:colors.primary,fontSize:18}}>+91 8766783939</Text>
             </View>
            </View>
-            <TouchableOpacity style={styles.listItem}>
+            <TouchableOpacity onPress={()=>{RateNow()}} style={styles.listItem}>
                 <MI size={iconSize} color={colorIcon} name='star'></MI>
-                <Text style={styles.listText}>Rate Our App</Text>
+                <Text style={styles.listText}>{i18n.t('Rate_Our_App')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.listItem}>
+            <TouchableOpacity onPress={()=>{onShare()}} style={styles.listItem}>
                 <MI size={iconSize} color={colorIcon} name='share'></MI>
-                <Text style={styles.listText}>Share Our App</Text>
+                <Text style={styles.listText}>{i18n.t('Share_Our_App')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.listItem}>
+            <TouchableOpacity onPress={()=>navigation.navigate('about')} style={styles.listItem}>
                 <MI size={iconSize} color={colorIcon} name='info'></MI>
-                <Text style={styles.listText}>About Us</Text>
+                <Text style={styles.listText}>{i18n.t('About_Us')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.listItem}>
+            <TouchableOpacity onPress={()=>navigation.navigate('FeedBack')} style={styles.listItem}>
+                <MI size={iconSize} color={colorIcon} name='info'></MI>
+                <Text style={styles.listText}>{i18n.t('FeedBack')}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('privacy',{url:'https://finedict.com/#/privacy-policy'})} style={styles.listItem}>
                 <MI size={iconSize} color={colorIcon} name='security'></MI>
-                <Text style={styles.listText}>Privacy Policy</Text>
+                <Text style={styles.listText}>{i18n.t('Privacy_Policy')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.listItem}>
+            <TouchableOpacity onPress={()=>navigation.navigate('privacy',{url:'https://finedict.com/#/privacy-policy'})} style={styles.listItem}>
                 <MI size={iconSize} color={colorIcon} name='list-alt'></MI>
-                <Text style={styles.listText}>Terms & Condition</Text>
+                <Text style={styles.listText}>{i18n.t('Terms_Condition')}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.listItem}>
                 <MI size={iconSize} color={colorIcon} name='logout'></MI>
-                <Text style={styles.listText}>Log out</Text>
+                <Text style={styles.listText}>{i18n.t('Log_out')}</Text>
             </TouchableOpacity>
         </View>
 

@@ -6,7 +6,7 @@ import Carousel, { Pagination } from 'react-native-snap-carousel'
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from '../components/CarouselCardItem'
 import ION from 'react-native-vector-icons/Ionicons'
 import LinearGradient from 'react-native-linear-gradient';
-
+import i18n from '../i18n'
 const Home = ({navigation}) => {
   const [index, setIndex] = React.useState(0)
   const isCarousel = React.useRef(null)
@@ -44,8 +44,8 @@ const Home = ({navigation}) => {
               source={require('../assets/img/logo.png')}
           />
           <View>
-            <Text style={{color:'#fff',fontFamily:'Poppins-Bold',fontSize:20}}>Welcome to the</Text>
-            <Text style={{fontSize:19,color:'#fff',fontFamily:'Poppins-Regular'}}>Finedict</Text>
+            <Text style={{color:'#fff',fontFamily:'Poppins-Bold',fontSize:20}}>{i18n.t('Welcome_to_the')}</Text>
+            <Text style={{fontSize:19,color:'#fff',fontFamily:'Poppins-Regular'}}>{i18n.t('Finedict')}</Text>
           </View>
           </View>
           <ION name="menu" color="#fff" size={30} onPress={()=>navigation.navigate('Menu')}></ION>
@@ -94,34 +94,34 @@ const Home = ({navigation}) => {
 
         </View>
         {/* <Text style={[styles.heading,{marginTop:'-2%'}]}>Our Motto</Text> */}
-        <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+        <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:'-3%'}}>
           <View style={styles.stepcard}>
             <Image
               style={styles.logo}
               source={require('../assets/img/flexible_A.png')}
           />          
-            <Text style={styles.stepText}>Flexible Amount</Text>
+            <Text style={styles.stepText}>{i18n.t('Flexible_Amount')}</Text>
           </View>
           <View style={styles.stepcard}>
             <Image
               style={styles.logo}
               source={require('../assets/img/Qd-f.png')}
           />          
-            <Text style={styles.stepText}>Quick Disbursal</Text>
+            <Text style={styles.stepText}>{i18n.t('Quick_Disbursal')}</Text>
           </View>
           <View style={styles.stepcard}>
             <Image
               style={styles.logo}
               source={require('../assets/img/cp.png')}
           />          
-            <Text style={styles.stepText}>Convenient Process</Text>
+            <Text style={styles.stepText}>{i18n.t('Convenient_Process')}</Text>
           </View>
         </View>
-        <Text style={styles.heading}>Quick Apply</Text>
+        <Text style={styles.heading}>{i18n.t('Quick_Apply')}</Text>
           <Button  
           onPress={()=>navigation.navigate('Contact')} title="Apply Now"></Button>
-          <Text style={[styles.heading,{marginTop:30}]}>Our Connected Banks</Text>
-          <View style={{flexDirection:'row',justifyContent:'space-around',marginTop:20}}>
+          <Text style={[styles.heading,{marginTop:20}]}>{i18n.t('Our_Connected_Banks')}</Text>
+          <View style={{flexDirection:'row',justifyContent:'space-around',marginTop:10}}>
             <Image style={styles.banklogo} source={require('../assets/img/hdfc.jpg')}></Image>
             <Image style={styles.banklogo} source={require('../assets/img/sbi.png')}></Image>
             <Image style={styles.banklogo} source={require('../assets/img/ICICI.jpg')}></Image>
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
         borderBottomEndRadius:35,
         borderBottomLeftRadius:35,
         padding:'6%',
-        height:120,
+        height:105,
         justifyContent:'space-between'
       },
       profile:{
@@ -200,12 +200,12 @@ const styles = StyleSheet.create({
         
       },
       logo:{
-        width:40,
-        height:40,
+        width:30,
+        height:30,
         marginRight:20,
         marginTop:5
       },
-      stepText:{fontSize:15,
+      stepText:{fontSize:14,
         color:'#000',fontFamily:'Poppins-SemiBold',marginTop:10
       },
         heading:{
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
         },
         banklogo:{
           width:'30%',
-          height:100,
+          height:80,
           resizeMode:'contain',
           borderRadius:15,
           elevation:3

@@ -9,6 +9,10 @@ import Tab from './Tab'
 import Home from '../screens/Home';
 import Contact from '../screens/Contact';
 import Menu from '../screens/Menu';
+import Privacy from '../screens/privacy';
+import About from '../screens/about';
+import FeedBack from '../screens/FeedBack';
+
 const Stack = createNativeStackNavigator();
 const screenOptions = {
     headerShown:false
@@ -24,7 +28,10 @@ const App = () => {
         <Stack.Screen options={screenOptions} name='Home' component={Home}></Stack.Screen>
         <Stack.Screen options={screenOptions} name='Contact' component={Contact}></Stack.Screen>
         <Stack.Screen options={screenOptions} name='Menu' component={Menu}></Stack.Screen>
-
+        <Stack.Screen options={screenOptions} name='privacy' component={Privacy}></Stack.Screen>
+        <Stack.Screen options={screenOptions} name='about' component={About}></Stack.Screen>
+        <Stack.Screen options={screenOptions} name='FeedBack' component={FeedBack}></Stack.Screen>
+        
       </Stack.Navigator>
     </NavigationContainer>
     </>

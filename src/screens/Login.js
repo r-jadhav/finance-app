@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import colors from '../constant/colors'
 import CircleButton from '../components/CircleButton';
 import LinearGradient from 'react-native-linear-gradient';
+import i18n from '../i18n'
 
 
 const LoginPage = ({navigation}) => {
@@ -29,7 +30,7 @@ const LoginPage = ({navigation}) => {
                 style={styles.Box}>
 
               <View style={{flexDirection:'column',marginTop:'10%',justifyContent:'space-between'}}>
-                <Text style={styles.Heading}>Enter Your Mobile Number</Text>
+                <Text style={styles.Heading}>{i18n.t('Enter_Your_Mobile_Number')}</Text>
                 <View style={{backgroundColor:'#fff',
                       width:'100%',
                       alignSelf:'center',
@@ -45,7 +46,7 @@ const LoginPage = ({navigation}) => {
                       style={{width:'100%',marginLeft:10,fontFamily:'Poppins-Regular',color:'#aaa',fontSize:16,alignItems:'center'}}
                     />
                 </View>
-                <CircleButton title="Get OTP"
+                <CircleButton title={i18n.t('Get_OTP')}
                   stylesB={{minWidth:'100%',height:45}} 
                   onPress={()=>navigation.navigate('Otp')}>
                 </CircleButton>  
