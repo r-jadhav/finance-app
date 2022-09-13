@@ -1,16 +1,52 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, TextInput, PreButtonssable, ImageBackground } from 'react-native'
+import React, { useState,useEffect } from "react";
+import { StyleSheet, Text, View, Image, TextInput, PreButtonssable, ImageBackground,Alert } from 'react-native'
 import Button from "../components/Button";
 import colors from '../constant/colors'
 import CircleButton from '../components/CircleButton';
 import LinearGradient from 'react-native-linear-gradient';
 import i18n from '../i18n'
+import axios from "axios"
 
 
 const LoginPage = ({navigation}) => {
   const [text, onChangeText] = React.useState("enter number");
-  const [number, onChangeNumber] = React.useState(null);
+  const [phone, setPhone] = React.useState(null);
+  const [otp, setOtp] = useState('')
+  useEffect(() => {
+    
+    setOtp(Math.floor(1000 + Math.random() * 9000));
+    
+  }, [])
+  
+  const Login = () => {
+    if(phone.length == 10){
+      axios
+      .post('https://finedict.com:3003/sendSms'
+      , {
+        number:phone,
+        otp:otp
+      })
+      .then((response) => {
+        console.log(response.data)
+        // if(response.status == 200){
+        //   Alert.alert('','Thank you for contacting us. we will reach out soon.')
+         
+        // navigation.goBack()
+  
+        // }else{
+        //   Alert.alert('','Could not process your request now. Try again later.')
+  
+        //   navigation.goBack()
+        // }
+        
+        
+      }).catch;
+    }else{
+      Alert.alert('','Please enter valid phone number')
+    }
+   
 
+  }
   return (
     <View style={{flex:1,flexDirection:'column',backgroundColor:'#fff'}}>
         {/* <ImageBackground source={image} resizeMode="cover" style={styles.bgimg}> */}
@@ -41,14 +77,16 @@ const LoginPage = ({navigation}) => {
                     <Text style={{fontFamily:'Poppins-Regular',color:'#aaa',fontSize:25,paddingLeft:10,fontWeight:'400'}}>|</Text>
                     <TextInput
                       keyboardType = 'numeric'
-                      onChangeText={onChangeNumber}
-                      value={number}
+                      onChangeText={setPhone}
+                      maxLength={10}
                       style={{width:'100%',marginLeft:10,fontFamily:'Poppins-Regular',color:'#aaa',fontSize:16,alignItems:'center'}}
                     />
                 </View>
-                <CircleButton title={i18n.t('Get_OTP')}
+                <CircleButton  title={i18n.t('Get_OTP')}
                   stylesB={{minWidth:'100%',height:45}} 
-                  onPress={()=>navigation.navigate('Otp')}>
+                  onPress={()=>{
+                    Login()
+                  }}>
                 </CircleButton>  
                     {/* <CircleButton title="Get Started" stylesB={{minWidth:70,height:70,borderRadius:70,alignSelf:'center'}} onPress={()=>navigation.navigate('Otp')}></CircleButton> */}
               </View>

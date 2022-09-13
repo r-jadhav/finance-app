@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { StyleSheet, Text, View, Image,ScrollView, TouchableOpacity,Platform ,Alert } from 'react-native'
 import FTextInput from '../components/FTextInput'
 import  Button  from '../components/Button';
@@ -9,16 +9,19 @@ import LinearGradient from 'react-native-linear-gradient';
 import i18n from '../i18n'
 import Share from 'react-native-share'
 import InAppReview from 'react-native-in-app-review';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AuthContext from '../navigation/Auth'
 const Menu = ({navigation}) => {
+  const { signOut } = useContext(AuthContext)
+
     const iconSize = 30
     const colorIcon = colors.primary
     const onShare = async () => {
       var link = '';
       if(Platform.OS == 'ios'){
-        link = 'https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en';
+        link = 'https://play.google.com/store/apps/details?id=com.finedict.app&hl=en';
       }else{
-        link = 'https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en'
+        link = 'https://play.google.com/store/apps/details?id=com.finedict.app&hl=en'
       }
       try {
         const result = await Share.open({
@@ -54,6 +57,10 @@ const Menu = ({navigation}) => {
         }); 
       }
      
+    }
+    const LogOut = async() =>{
+      await AsyncStorage.clear()
+      signOut()
     }
   return (
     <View style={styles.container}>
@@ -97,11 +104,11 @@ const Menu = ({navigation}) => {
                 <MI size={iconSize} color={colorIcon} name='security'></MI>
                 <Text style={styles.listText}>{i18n.t('Privacy_Policy')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('privacy',{url:'https://finedict.com/#/privacy-policy'})} style={styles.listItem}>
+            <TouchableOpacity onPress={()=>navigation.navigate('privacy',{url:'https://finedict.com/#/terms'})} style={styles.listItem}>
                 <MI size={iconSize} color={colorIcon} name='list-alt'></MI>
                 <Text style={styles.listText}>{i18n.t('Terms_Condition')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.listItem}>
+            <TouchableOpacity onPress={()=>{LogOut()}} style={styles.listItem}>
                 <MI size={iconSize} color={colorIcon} name='logout'></MI>
                 <Text style={styles.listText}>{i18n.t('Log_out')}</Text>
             </TouchableOpacity>

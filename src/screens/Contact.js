@@ -7,7 +7,6 @@ import EvilIcons from 'react-native-vector-icons/AntDesign'
 import axios from "axios"
 import { Formik, Field } from 'formik'
 import * as yup from 'yup'
-
 import CustomInput from './CustomInput'
 import i18n from '../i18n';
 
