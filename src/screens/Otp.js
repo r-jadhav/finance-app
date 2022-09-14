@@ -1,16 +1,69 @@
-import React, { useState } from "react";
-import { TextInput,StyleSheet, Text, View, Image, TouchableOpacity, Pressable, ImageBackground } from 'react-native'
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import React, { useState,useContext } from "react";
+import { TextInput,StyleSheet, Text, View, Image, TouchableOpacity, Pressable, ImageBackground, Alert } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import Button from "../components/Button";
 import CircleButton from "../components/CircleButton";
 import colors from "../constant/colors";
 import i18n from '../i18n'
+import AuthContext from "../navigation/Auth";
 
-const Otp = ({navigation}) => {
+const Otp = ({route,navigation}) => {
   const [text, onChangeText] = React.useState("enter number");
-  const [number, onChangeNumber] = React.useState(null);
+  const [enterOtp, setenterOtp] = React.useState(null);
+  const {number,otp} = route.params;
+  const { signIn } = useContext(AuthContext)
+  const [loading, setLoading] = useState(false)
+
 const editnumber = () =>{
   navigation.goBack()
+}
+const checkOtp = () =>{
+  if(parseInt(enterOtp) == otp){
+    setLoading(true)
+    axios
+    .post('https://finedict.com:3003/addUser'
+    , {
+      phone:number
+    })
+    .then(async(response) => {
+      console.log(response.data)
+      if(response.status == 200){
+        Alert.alert('','Login Success')
+        signIn('124')
+        await AsyncStorage.setItem('USER_TOKEN',number)
+      }else{
+        Alert.alert('','Could not process your request now. Try again later.')
+      }
+    }).catch(err=>{
+      console.log(err)
+    }).finally(()=>{
+      setLoading(false)
+    });
+  }else{
+    Alert.alert('','Kindly enter valid otp')
+  }
+  
+}
+const resendOtp = () =>{
+  setLoading(true)
+  axios
+      .post('https://finedict.com:3003/sendSms'
+      , {
+        number:number,
+        otp:otp
+      })
+      .then(async(response) => {
+        
+        if(response.data.Status == 'Success'){
+         Alert.alert('','Otp sent successfully')
+        }
+      }).catch(err=>{
+        console.log(err)
+      }).finally(()=>{
+        setLoading(false)
+      });
 }
   return (
     <View style={{flex:1,flexDirection:'column',backgroundColor:'#fff'}}>
@@ -29,7 +82,7 @@ const editnumber = () =>{
                 style={styles.Box}>
 
               <View style={{flexDirection:'column',marginTop:'10%',justifyContent:'space-between'}}>
-                <Text style={styles.Heading}>{i18n.t('Enter_OTP_sent_to')} 9884098840</Text>
+                <Text style={styles.Heading}>{i18n.t('Enter_OTP_sent_to')} {number}</Text>
                 <TextInput
                       style={{backgroundColor:'#fff',
                       width:'100%',
@@ -37,21 +90,26 @@ const editnumber = () =>{
                       borderRadius:5,
                       marginTop:20,marginBottom:5,paddingLeft:15,fontFamily:'Poppins-Regular',color:'#aaa',fontSize:16}}
                       keyboardType = 'numeric'
-                      onChangeText={onChangeNumber}
-                      value={number}
+                      onChangeText={setenterOtp}
+                   
                       placeholder={i18n.t('Enter_4_Digit_OTP')}
                      
                     />
                 <View style={styles.resend}>
-                        <Text style={{color:'#fff',fontFamily:'Poppins-Medium',fontSize:16}}>{i18n.t('Resend_OTP')}</Text>
+                  <TouchableOpacity onPress={()=>{
+                    resendOtp()
+                  }}>
+ <Text style={{color:'#fff',fontFamily:'Poppins-Medium',fontSize:16}}>{i18n.t('Resend_OTP')}</Text>
+                  </TouchableOpacity>
+                       
                         <TouchableOpacity onPress={()=>{editnumber()}}>
                         <Text style={{color:'#fff',fontFamily:'Poppins-Medium',fontSize:16}}>{i18n.t('Edit_Number')}</Text>
                           </TouchableOpacity>
                     </View>
 
-                    <CircleButton title={i18n.t('Submit')}
+                    <CircleButton loading={loading} title={i18n.t('Submit')}
                     stylesB={{minWidth:'100%',height:45,}} 
-                    onPress={()=>navigation.navigate('Home')}>
+                    onPress={()=>{checkOtp()}}>
                   </CircleButton> 
 
               </View>

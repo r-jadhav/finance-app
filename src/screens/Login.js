@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useContext } from "react";
 import { StyleSheet, Text, View, Image, TextInput, PreButtonssable, ImageBackground,Alert } from 'react-native'
 import Button from "../components/Button";
 import colors from '../constant/colors'
@@ -6,12 +6,16 @@ import CircleButton from '../components/CircleButton';
 import LinearGradient from 'react-native-linear-gradient';
 import i18n from '../i18n'
 import axios from "axios"
+import AuthContext from "../navigation/Auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const LoginPage = ({navigation}) => {
   const [text, onChangeText] = React.useState("enter number");
   const [phone, setPhone] = React.useState(null);
   const [otp, setOtp] = useState('')
+  const { signIn } = useContext(AuthContext)
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     
     setOtp(Math.floor(1000 + Math.random() * 9000));
@@ -20,27 +24,32 @@ const LoginPage = ({navigation}) => {
   
   const Login = () => {
     if(phone.length == 10){
+      setLoading(true)
       axios
       .post('https://finedict.com:3003/sendSms'
       , {
         number:phone,
         otp:otp
       })
-      .then((response) => {
-        console.log(response.data)
-        // if(response.status == 200){
-        //   Alert.alert('','Thank you for contacting us. we will reach out soon.')
-         
-        // navigation.goBack()
-  
-        // }else{
-        //   Alert.alert('','Could not process your request now. Try again later.')
-  
-        //   navigation.goBack()
-        // }
+      .then(async(response) => {
         
-        
-      }).catch;
+        if(response.data.Status == 'Success'){
+          navigation.navigate('Otp',{number:phone,otp:otp})
+        }else{
+          console.log()
+          if(response.data.msg == 'Login Success'){
+            signIn('124')
+            await AsyncStorage.setItem('USER_TOKEN',phone)
+          }else{
+            Alert.alert('','Could not process your request now. Try again later.')
+          }
+          
+        }
+      }).catch(err=>{
+        console.log(err)
+      }).finally(()=>{
+        setLoading(false)
+      });
     }else{
       Alert.alert('','Please enter valid phone number')
     }
@@ -82,7 +91,7 @@ const LoginPage = ({navigation}) => {
                       style={{width:'100%',marginLeft:10,fontFamily:'Poppins-Regular',color:'#aaa',fontSize:16,alignItems:'center'}}
                     />
                 </View>
-                <CircleButton  title={i18n.t('Get_OTP')}
+                <CircleButton  loading={loading} title={i18n.t('Get_OTP')}
                   stylesB={{minWidth:'100%',height:45}} 
                   onPress={()=>{
                     Login()

@@ -1,4 +1,4 @@
-import React,{useContext} from 'react'
+import React,{useContext,useState} from 'react'
 import { StyleSheet, Text, View, Image,ScrollView, TouchableOpacity,Platform ,Alert } from 'react-native'
 import FTextInput from '../components/FTextInput'
 import  Button  from '../components/Button';
@@ -13,7 +13,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthContext from '../navigation/Auth'
 const Menu = ({navigation}) => {
   const { signOut } = useContext(AuthContext)
-
+  const [phone, setNumber] = useState('')
+  React.useEffect(async() => {
+    setNumber(await AsyncStorage.getItem('USER_TOKEN'))
+    
+  }, [])
+  
     const iconSize = 30
     const colorIcon = colors.primary
     const onShare = async () => {
@@ -80,8 +85,8 @@ const Menu = ({navigation}) => {
            <View style={{flexDirection:'row',alignItems:'center',marginVertical:20}}>
              <Image style={{width:80,height:80}} source={require('../assets/img/user.png')}></Image>
             <View style={{marginLeft:20}}>
-                <Text style={{fontFamily:'Poppins-Medium',color:'#000',fontSize:22}}>Rahul Kapadia</Text>
-                <Text style={{fontFamily:'Poppins-Regular',color:colors.primary,fontSize:18}}>+91 8766783939</Text>
+                <Text style={{fontFamily:'Poppins-Medium',color:'#000',fontSize:22}}>Phone Number</Text>
+                <Text style={{fontFamily:'Poppins-Regular',color:colors.primary,fontSize:18}}>+91 {phone}</Text>
             </View>
            </View>
             <TouchableOpacity onPress={()=>{RateNow()}} style={styles.listItem}>

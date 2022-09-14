@@ -44,9 +44,7 @@ const App = () => {
     <>
     <NavigationContainer>
     <AuthContext.Provider value={authContext}> 
-   
-    </AuthContext.Provider>
-      <Stack.Navigator>
+    <Stack.Navigator>
       {state.userToken == null ? (
             <>
             <Stack.Screen options={screenOptions} name='Lang' component={SelectLanguage}></Stack.Screen>
@@ -65,6 +63,8 @@ const App = () => {
             
         
       </Stack.Navigator>
+    </AuthContext.Provider>
+      
     </NavigationContainer>
     </>
   )

@@ -47,62 +47,22 @@ style={styles.container}>
   {/* <Text style={styles.buttonText}>
     Sign in with Facebook
   </Text> */}
-  <View style={{flex:1}}>
-  <Lottie style={{position:'absolute',top:'-30%'}} source={require('../assets/star.json')} speed={1.5} loop={true} autoPlay  />
-  </View>
-  <View style={{flex:3}}>
         <Text style={{color:'#fff',fontSize:30}}>Select Language</Text>
-      <TouchableOpacity onPress={()=>{
-          setvisible(true)
-        }}>
-            {/* <CircleButton  title={i18n.t('Change_Language')}
-          stylesB={{minWidth:180,height:45,alignSelf:'center'}} 
-          onPress={()=>{setvisible(true)}}>
-            </CircleButton> */}
-
-
-        <View>
-            <RadioButton
-                    value="en"
-                    status={ checked === 'en' ? 'checked' : 'unchecked' }
-                    onPress={() => {
-                        i18n.changeLanguage('en');
-                        setLanguageInStorage('en');
-                        setChecked('en');
-                    }}
-                />
-            <Text style={{fontSize:20,color:'#fff'}}
-            onPress={() => {
-                i18n.changeLanguage('en');
-                setLanguageInStorage('en');
-                setChecked('en');
-            }}>English</Text>
+          <RadioButton.Group onValueChange={newValue => {
+            i18n.changeLanguage(newValue);
+            setLanguageInStorage(newValue);
+            setChecked(newValue);
+          }} value={checked}>
+          <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
             
-        </View>
-
-        <View style={{display:'flex'}}>
-            <RadioButton
-                    value="hi"
-                    status={ checked === 'hi' ? 'checked' : 'unchecked' }
-                    onPress={() => {
-                        i18n.changeLanguage('hi');
-                        setLanguageInStorage('hi');
-                        setChecked('hi');
-                    }}
-                />
-            <Text style={{fontSize:20,color:'#fff'}} onPress={() => {
-                    i18n.changeLanguage('hi');
-                    setLanguageInStorage('hi');
-                    setChecked('hi');
-                }}>हिन्दी</Text>
-
-            
-        </View>
-
-
-          {/* <Text style={{color:'#fff',fontSize:18,textDecorationLine:'underline'}}>Change language</Text> */}
-        </TouchableOpacity>
-     
+            <RadioButton value="en" />
+            <Text style={{color:'#fff'}}>English</Text>
+          </View>
+          <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+            <RadioButton value="hi" />
+            <Text style={{color:'#fff'}}>हिन्दी</Text>
+          </View>
+        </RadioButton.Group>
         <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
         <CircleButton  title={i18n.t('Get_Started')}
           stylesB={{minWidth:180,height:45,alignSelf:'center'}} 
@@ -110,56 +70,10 @@ style={styles.container}>
         </CircleButton>
        
         </View>
-</View>
+
      
       
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={visible}
-          onRequestClose={() => {
-            setvisible(!visible);
-          }}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
-                <Text
-                  style={{fontSize: 20, color: '#221f5f', fontWeight: 'bold'}}>
-                  Change Language
-                </Text>
-                <ANT
-                  onPress={() => {
-                    setvisible(false);
-                  }}
-                  name="close"
-                  size={25}></ANT>
-              </View>
-              <TouchableOpacity
-                onPress={() => {
-                  i18n.changeLanguage('en');
-                  setLanguageInStorage('en');
-                  setvisible(false);
-                }}
-                style={styles.langRow}>
-                <Text style={{fontSize: 20, color: '#000'}}>English</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  i18n.changeLanguage('hi');
-                  setLanguageInStorage('hi');
-                  setvisible(false);
-                }}
-                style={styles.langRow}>
-                <Text style={{fontSize: 20, color: '#000'}}>हिन्दी</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>     
+   
     </LinearGradient>
   )
 }
@@ -169,10 +83,11 @@ export default Onboarding
 const styles = StyleSheet.create({ 
     container:{
         flex:1,
-        justifyContent:'flex-end',
+        justifyContent:'center',
         alignItems:'flex-start',
         backgroundColor:colors.primary,
-        padding:30
+        padding:30,
+        
     },
     onboardingLogo:{
         width:350,
