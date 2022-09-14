@@ -3,12 +3,14 @@ import React from 'react'
 import CircleButton from '../components/CircleButton';
 import colors from '../constant/colors';
 import Lottie from 'lottie-react-native';
+import { RadioButton } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import i18n from '../i18n'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ANT from 'react-native-vector-icons/AntDesign';
 
 const Onboarding = ({navigation}) => {
+    const [checked, setChecked] = React.useState('en');
   const [visible, setvisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -45,37 +47,73 @@ style={styles.container}>
   {/* <Text style={styles.buttonText}>
     Sign in with Facebook
   </Text> */}
-      <View style={{
-          width:250,
-          height:250,
-          borderRadius:250,
-          borderColor:'#fff',
-          borderWidth:1,
-          position:'absolute',top:'-5%',left:'-10%'
-      }}></View>
-      <View style={{
-          width:250,
-          height:250,
-          borderRadius:250,
-          borderColor:'#fff',
-          borderWidth:1,
-          position:'absolute',top:'10%',left:'-30%'
-      }}></View> 
-      <Lottie style={{position:'absolute',top:'-30%'}} source={require('../assets/star.json')} speed={1.5} loop={true} autoPlay  />
-      <Text style={{fontSize:40,color:'#fff',marginBottom:5,fontFamily:'Poppins-Regular'}}>{i18n.t('Quick_Loan')}</Text>
-      <Text style={{color:'#fff',width:'85%',textAlign:'left',fontSize:16,fontFamily:'Poppins-Regular'}}>{i18n.t('onboard')}</Text>
+  <View style={{flex:1}}>
+  <Lottie style={{position:'absolute',top:'-30%'}} source={require('../assets/star.json')} speed={1.5} loop={true} autoPlay  />
+  </View>
+  <View style={{flex:3}}>
+        <Text style={{color:'#fff',fontSize:30}}>Select Language</Text>
+      <TouchableOpacity onPress={()=>{
+          setvisible(true)
+        }}>
+            {/* <CircleButton  title={i18n.t('Change_Language')}
+          stylesB={{minWidth:180,height:45,alignSelf:'center'}} 
+          onPress={()=>{setvisible(true)}}>
+            </CircleButton> */}
+
+
+        <View>
+            <RadioButton
+                    value="en"
+                    status={ checked === 'en' ? 'checked' : 'unchecked' }
+                    onPress={() => {
+                        i18n.changeLanguage('en');
+                        setLanguageInStorage('en');
+                        setChecked('en');
+                    }}
+                />
+            <Text style={{fontSize:20,color:'#fff'}}
+            onPress={() => {
+                i18n.changeLanguage('en');
+                setLanguageInStorage('en');
+                setChecked('en');
+            }}>English</Text>
+            
+        </View>
+
+        <View style={{display:'flex'}}>
+            <RadioButton
+                    value="hi"
+                    status={ checked === 'hi' ? 'checked' : 'unchecked' }
+                    onPress={() => {
+                        i18n.changeLanguage('hi');
+                        setLanguageInStorage('hi');
+                        setChecked('hi');
+                    }}
+                />
+            <Text style={{fontSize:20,color:'#fff'}} onPress={() => {
+                    i18n.changeLanguage('hi');
+                    setLanguageInStorage('hi');
+                    setChecked('hi');
+                }}>हिन्दी</Text>
+
+            
+        </View>
+
+
+          {/* <Text style={{color:'#fff',fontSize:18,textDecorationLine:'underline'}}>Change language</Text> */}
+        </TouchableOpacity>
+     
         <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
         <CircleButton  title={i18n.t('Get_Started')}
           stylesB={{minWidth:180,height:45,alignSelf:'center'}} 
-          onPress={()=>navigation.navigate('Login')}>
+          onPress={()=>navigation.navigate('Intro')}>
         </CircleButton>
-        <TouchableOpacity onPress={()=>{
-          setvisible(true)
-        }}>
-          {/* <Text style={{color:'#fff',fontSize:18,textDecorationLine:'underline'}}>Change language</Text> */}
-        </TouchableOpacity>
+       
         </View>
-        {/* <Modal
+</View>
+     
+      
+        <Modal
           animationType="slide"
           transparent={true}
           visible={visible}
@@ -121,7 +159,7 @@ style={styles.container}>
               </TouchableOpacity>
             </View>
           </View>
-        </Modal>      */}
+        </Modal>     
     </LinearGradient>
   )
 }

@@ -13,6 +13,7 @@ import Privacy from '../screens/privacy';
 import About from '../screens/about';
 import FeedBack from '../screens/FeedBack';
 import AuthContext, {defaultState, reducer, restoreToken} from './Auth';
+import SelectLanguage from '../screens/SelectLanguage';
 
 const Stack = createNativeStackNavigator();
 const screenOptions = {
@@ -48,6 +49,7 @@ const App = () => {
       <Stack.Navigator>
       {state.userToken == null ? (
             <>
+            <Stack.Screen options={screenOptions} name='Lang' component={SelectLanguage}></Stack.Screen>
               <Stack.Screen options={screenOptions} name='Intro' component={Onboarding}></Stack.Screen>
               <Stack.Screen options={screenOptions} name='Login' component={Login}></Stack.Screen>
               <Stack.Screen options={screenOptions} name='Otp' component={Otp}></Stack.Screen>

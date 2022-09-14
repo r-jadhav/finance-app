@@ -22,10 +22,7 @@ const editnumber = () =>{
                 />
               
             </View>
-
-
             <View style={[styles.container,{flex:3}]}>
-
             <LinearGradient
                 colors={['#6a32a1','#ce49bfad'] }
                 start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
