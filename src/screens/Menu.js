@@ -73,7 +73,8 @@ const Menu = ({navigation}) => {
       <LinearGradient
               colors={['#6a32a1','#ce49bfad'] }
               start={{x: 0.3, y: 0.25}} end={{x: 0.5, y: 1.0}}
-               style={[styles.header,{backgroundColor:colors.primary}]}>
+               style={[styles.header,{backgroundColor:colors.primary,borderBottomRightRadius: 35,
+                borderBottomLeftRadius: 35,}]}>
             <TouchableOpacity onPress={()=>navigation.goBack()}>
                 <EvilIcons color="#fff" size={30} name='arrowleft'></EvilIcons>
             </TouchableOpacity> 
@@ -135,8 +136,8 @@ const styles = StyleSheet.create({
       header:{
         flex:2,
         width:'100%',
-        borderBottomEndRadius:15,
-        borderBottomLeftRadius:15,
+        borderBottomEndRadius:35,
+        borderBottomLeftRadius:35,
         padding:'8%',
         flexDirection:'row',
         justifyContent:'space-between',

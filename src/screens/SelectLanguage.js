@@ -47,33 +47,29 @@ style={styles.container}>
   {/* <Text style={styles.buttonText}>
     Sign in with Facebook
   </Text> */}
-        <Text style={{color:'#fff',fontSize:30}}>Select Language</Text>
+        <Text style={{color:'#fff',fontSize:30,textAlign:'center'}}>Select Language</Text>
+
+        <View style={{alignSelf:'center', backgroundColor:'#fff',width:'80%',padding:20,padding:20,borderRadius:5,marginTop:20}}>
           <RadioButton.Group onValueChange={newValue => {
             i18n.changeLanguage(newValue);
             setLanguageInStorage(newValue);
             setChecked(newValue);
           }} value={checked}>
-          <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+          <View style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}}>
             
             <RadioButton value="en" />
-            <Text style={{color:'#fff'}}>English</Text>
+            <Text style={{color:'#222',fontSize:20}}>English</Text>
           </View>
-          <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+          <View style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}}>
             <RadioButton value="hi" />
-            <Text style={{color:'#fff'}}>हिन्दी</Text>
+            <Text style={{color:'#222',fontSize:20}}>हिन्दी</Text>
           </View>
-        </RadioButton.Group>
-        <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+          </RadioButton.Group>
+        </View>
         <CircleButton  title={i18n.t('Get_Started')}
           stylesB={{minWidth:180,height:45,alignSelf:'center'}} 
           onPress={()=>navigation.navigate('Intro')}>
         </CircleButton>
-       
-        </View>
-
-     
-      
-   
     </LinearGradient>
   )
 }
@@ -84,24 +80,10 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         justifyContent:'center',
-        alignItems:'flex-start',
+        // alignItems:'flex-start',
         backgroundColor:colors.primary,
-        padding:30,
-        
+        padding:30,  
     },
-    onboardingLogo:{
-        width:350,
-        height:250,
-        alignSelf:'center',
-    },
-    continueBtn:{
-      padding:20,
-      alignSelf:'flex-end',
-    },
-    separator: {
-        borderBottomColor: '#737373',
-        borderBottomWidth: 20,
-      },
       linearGradient: {
         flex: 1,
         paddingLeft: 15,

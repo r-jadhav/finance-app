@@ -35,9 +35,7 @@ i18n.use(initReactI18next).init({
         "Quick_Apply":"Quick Apply",
         "Convenient_Process":"Convenient Process",
         "Our_Connected_Banks":"Our Connected Banks",
-        "about":"FinEdict financial services pvt. ltd. is on a divine journey\
-        to help people in a new way to reach their financial goals.\
-        We provide a process that is not only simple but also transparent.",
+        "about":"FinEdict financial services pvt. ltd. is on a divine journey to help people in a new way to reach their financial goals. We provide a process that is not only simple but also transparent.",
         "FeedBack":"FeedBack",
         "Contact":"Contact",
         "Require_Loan_Amount":"Require Loan Amount",

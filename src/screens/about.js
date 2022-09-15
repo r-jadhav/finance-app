@@ -1,10 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image,ScrollView, TouchableOpacity,Platform ,Alert } from 'react-native'
-import FTextInput from '../components/FTextInput'
-import  Button  from '../components/Button';
 import colors from '../constant/colors'
 import EvilIcons from 'react-native-vector-icons/AntDesign'
-import MI from 'react-native-vector-icons/MaterialIcons'
 import LinearGradient from 'react-native-linear-gradient';
 import i18n from '../i18n'
 
@@ -17,25 +14,30 @@ const Menu = ({navigation}) => {
       <LinearGradient
               colors={['#6a32a1','#ce49bfad'] }
               start={{x: 0.3, y: 0.25}} end={{x: 0.5, y: 1.0}}
-               style={[styles.header,{backgroundColor:colors.primary}]}>
+               style={[styles.header,{backgroundColor:colors.primary,borderBottomRightRadius: 35,
+                borderBottomLeftRadius: 35,}]}>
+                
             <TouchableOpacity onPress={()=>navigation.goBack()}>
                 <EvilIcons color="#fff" size={30} name='arrowleft'></EvilIcons>
             </TouchableOpacity> 
           <Text style={{textAlign:'center',fontSize:25,color:'#fff',
           fontFamily:'Poppins-SemiBold'}}>{i18n.t('About_Us')}</Text>
           <Text></Text>
-        </LinearGradient>
+      </LinearGradient>
         <View style={styles.contactForm}>
-          <Text>{i18n.t('about')}</Text>
-<Text>
-Process
+          <Text style={{marginTop:20,color:'#2d2e2e'}}>{i18n.t('about')}</Text>
 
-Sit relax and enjoy a never experienced smooth process of FinEdict Finance.
+      <View style={{marginVertical:20}}>
+        <Text style={{fontSize:16,color:'#2d2e2e',marginBottom:5}}>Process -</Text>
+        <Text style={{color:'#2d2e2e'}}>Sit relax and enjoy a never experienced smooth process of FinEdict Finance.</Text>
+      </View>
 
-Security
+      <View style={{}}>
+          <Text style={{fontSize:16,color:'#2d2e2e',marginBottom:5}}> Security -</Text>
 
-We check your information security. Your data our responsibility.
-</Text>
+          <Text style={{color:'#2d2e2e'}}> We check your information security. Your data our responsibility.</Text>
+      </View>
+
         </View>
 
       </ScrollView>
@@ -54,8 +56,8 @@ const styles = StyleSheet.create({
       header:{
         flex:2,
         width:'100%',
-        borderBottomEndRadius:15,
-        borderBottomLeftRadius:15,
+        borderBottomEndRadius:35,
+        borderBottomLeftRadius:35,
         padding:'8%',
         flexDirection:'row',
         justifyContent:'space-between',
