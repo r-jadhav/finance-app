@@ -14,6 +14,15 @@ import About from '../screens/about';
 import FeedBack from '../screens/FeedBack';
 import AuthContext, {defaultState, reducer, restoreToken} from './Auth';
 import SelectLanguage from '../screens/SelectLanguage';
+import DrawerNavigator from './DrawerNavigator';
+import HomeLoan from '../screens/Forms/HomeLoan';
+import CarLoan from '../screens/Forms/CarLoan';
+import PersonalLoan from '../screens/Forms/PersonalLoan';
+import ProfessionalLoan from '../screens/Forms/ProfessionalLoan';
+import SecuredBusinessLoan from '../screens/Forms/SecuredBusinessLoan';
+import SecuredOverdraftLimit from '../screens/Forms/SecuredOverdraftLimit';
+import UnsecuredBusinessLoan from '../screens/Forms/UnsecuredBusinessLoan';
+import UnsecuredOverdraftLimit from '../screens/Forms/UnsecuredOverdraftLimit';
 
 const Stack = createNativeStackNavigator();
 const screenOptions = {
@@ -54,14 +63,22 @@ const App = () => {
             </>) :(
             <>
               <Stack.Screen options={screenOptions} name='Home' component={Home}></Stack.Screen>
+              <Stack.Screen options={screenOptions} name='HomeLoan' component={HomeLoan}></Stack.Screen>
+              <Stack.Screen options={screenOptions} name='CarLoan' component={CarLoan}></Stack.Screen>
+              <Stack.Screen options={screenOptions} name='PersonalLoan' component={PersonalLoan}></Stack.Screen>
+              <Stack.Screen options={screenOptions} name='ProfessionalLoan' component={ProfessionalLoan}></Stack.Screen>
+              <Stack.Screen options={screenOptions} name='SecuredBusinessLoan' component={SecuredBusinessLoan}></Stack.Screen>
+              <Stack.Screen options={screenOptions} name='SecuredOverdraftLimit' component={SecuredOverdraftLimit}></Stack.Screen>
+              <Stack.Screen options={screenOptions} name='UnsecuredBusinessLoan' component={UnsecuredBusinessLoan}></Stack.Screen>
+              <Stack.Screen options={screenOptions} name='UnsecuredOverdraftLimit' component={UnsecuredOverdraftLimit}></Stack.Screen>
               <Stack.Screen options={screenOptions} name='Contact' component={Contact}></Stack.Screen>
               <Stack.Screen options={screenOptions} name='Menu' component={Menu}></Stack.Screen>
               <Stack.Screen options={screenOptions} name='privacy' component={Privacy}></Stack.Screen>
               <Stack.Screen options={screenOptions} name='about' component={About}></Stack.Screen>
               <Stack.Screen options={screenOptions} name='FeedBack' component={FeedBack}></Stack.Screen>
+              <Stack.Screen name="Drawer" component={DrawerNavigator} />
             </>)}
-            
-        
+
       </Stack.Navigator>
     </AuthContext.Provider>
       

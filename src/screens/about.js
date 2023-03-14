@@ -28,14 +28,15 @@ const Menu = ({navigation}) => {
           <Text style={{marginTop:20,color:'#2d2e2e'}}>{i18n.t('about')}</Text>
 
       <View style={{marginVertical:20}}>
-        <Text style={{fontSize:16,color:'#2d2e2e',marginBottom:5}}>Process -</Text>
-        <Text style={{color:'#2d2e2e'}}>Sit relax and enjoy a never experienced smooth process of FinEdict Finance.</Text>
+        <Text style={{fontSize:16,color:'#2d2e2e',marginBottom:5}}>{i18n.t('Process_heading')}</Text>
+        <Text style={{color:'#2d2e2e'}}>{i18n.t('Process_des')}
+        </Text>
       </View>
 
       <View style={{}}>
-          <Text style={{fontSize:16,color:'#2d2e2e',marginBottom:5}}> Security -</Text>
+          <Text style={{fontSize:16,color:'#2d2e2e',marginBottom:5}}>{i18n.t('Security_heading')}</Text>
 
-          <Text style={{color:'#2d2e2e'}}> We check your information security. Your data our responsibility.</Text>
+          <Text style={{color:'#2d2e2e'}}> {i18n.t('Security_des')} </Text>
       </View>
 
         </View>

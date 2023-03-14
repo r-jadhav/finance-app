@@ -120,11 +120,10 @@ const styles = StyleSheet.create({
     backgroundColor:'#f5f5f5'
   },
   header:{
-    flex:0.2,
     width:'100%',
     borderBottomEndRadius:35,
     borderBottomLeftRadius:35,
-    padding:'8%',
+    padding:'4%',
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center'

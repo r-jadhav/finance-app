@@ -4,33 +4,45 @@ import colors from '../constant/colors'
 import Button from '../components/Button'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from '../components/CarouselCardItem'
+import CarouselBankLogo from '../components/CarouselBankLogo'
 import ION from 'react-native-vector-icons/Ionicons'
 import LinearGradient from 'react-native-linear-gradient';
 import i18n from '../i18n'
+import FormModal from '../components/FormsModal'
+
 const Home = ({navigation}) => {
+
+  const [modalLogin, setModalLogin] = React.useState(false);
   const [index, setIndex] = React.useState(0)
   const isCarousel = React.useRef(null)
   const data = [
     {
       title: "Aenean leo",
       body: "Ut tincidunt tincidunt erat. Sed cursus turpis vitae tortor. Quisque malesuada placerat nisl. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
-      imgUrl: "https://images.pexels.com/photos/4386370/pexels-photo-4386370.jpeg",
+      imgUrl:require('../assets/img/1.png')
     },
     {
       title: "In turpis",
       body: "Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ",
-      imgUrl: "https://images.pexels.com/photos/259249/pexels-photo-259249.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      imgUrl: require('../assets/img/2.png')
     },
     {
       title: "Lorem Ipsum",
       body: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-      imgUrl: "https://images.pexels.com/photos/6289030/pexels-photo-6289030.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      imgUrl: require('../assets/img/3.png')
     },
   ];
+  const LOGO = [
+    { imgUrl:require('../assets/img/bajaj.jpg') },
+    { imgUrl: require('../assets/img/sbi.png') },
+    { imgUrl: require('../assets/img/ICICI.jpg') },
+    { imgUrl: require('../assets/img/capri.jpg') },
+    { imgUrl: require('../assets/img/axis.jpg') },
+  ];
+
   return (
+
     <View style={{flex:1,backgroundColor:'#fff',}}>
-
-
 
           <LinearGradient
               colors={['#6a32a1','#ce49bfad'] }
@@ -41,18 +53,17 @@ const Home = ({navigation}) => {
           <View style={{flexDirection:'row'}}>
           <Image
               style={styles.profile}
-              source={require('../assets/img/logo.png')}
+              source={require('../assets/img/faviconwh.png')}
           />
-          <View>
-            <Text style={{color:'#fff',fontFamily:'Poppins-Bold',fontSize:20}}>{i18n.t('Welcome_to_the')}</Text>
-            <Text style={{fontSize:19,color:'#fff',fontFamily:'Poppins-Regular'}}>{i18n.t('Finedict')}</Text>
+          <View style={{alignSelf:'center'}}>
+            <Text style={{color:'#fff',fontFamily:'Poppins-Bold',fontSize:24}}>{i18n.t('Welcome_to_the')}</Text>
+            {/* <Text style={{fontSize:19,color:'#fff',fontFamily:'Poppins-Regular'}}>{i18n.t('Finedict')}</Text> */}
           </View>
           </View>
-          <ION name="menu" color="#fff" size={30} onPress={()=>navigation.navigate('Menu')}></ION>
+          <ION name="menu" color="#fff" size={30} onPress={()=>navigation.navigate('Menu')} style={{alignSelf:'center',paddingVertical:'6%'}}></ION>
         </View>
 
         </LinearGradient>
-
 
         <ScrollView>
        
@@ -60,9 +71,9 @@ const Home = ({navigation}) => {
 
        <View style={{padding:10}}>
        <View style={{ backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 50,paddingBottom:0,paddingTop:10}}>
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 50,paddingBottom:0,paddingTop:10}}>
         <Carousel
         layout="default"
         layoutCardOffset={9}
@@ -94,46 +105,57 @@ const Home = ({navigation}) => {
 
         </View>
         {/* <Text style={[styles.heading,{marginTop:'-2%'}]}>Our Motto</Text> */}
-        <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:'-3%'}}>
+        <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:'-3%',marginBottom:20}}>
           <View style={styles.stepcard}>
             <Image
               style={styles.logo}
-              source={require('../assets/img/flexible_A.png')}
+              source={require('../assets/img/flexible_Am.png')}
           />          
             <Text style={styles.stepText}>{i18n.t('Flexible_Amount')}</Text>
           </View>
           <View style={styles.stepcard}>
             <Image
               style={styles.logo}
-              source={require('../assets/img/Qd-f.png')}
+              source={require('../assets/img/quick.png')}
           />          
             <Text style={styles.stepText}>{i18n.t('Quick_Disbursal')}</Text>
           </View>
           <View style={styles.stepcard}>
             <Image
               style={styles.logo}
-              source={require('../assets/img/cp.png')}
+              source={require('../assets/img/conveProcess.png')}
           />          
             <Text style={styles.stepText}>{i18n.t('Convenient_Process')}</Text>
           </View>
         </View>
-        <Text style={styles.heading}>{i18n.t('Quick_Apply')}</Text>
+        {/* <Text style={styles.heading}>{i18n.t('Quick_Apply')}</Text> */}
           <Button  
-          onPress={()=>navigation.navigate('Contact')} title="Apply Now"></Button>
+          onPress={()=>{setModalLogin(true)}} title={i18n.t('Apply_Now')}></Button>
           <Text style={[styles.heading,{marginTop:20}]}>{i18n.t('Our_Connected_Banks')}</Text>
-          <View style={{flexDirection:'row',justifyContent:'space-around',marginTop:10}}>
-            <Image style={styles.banklogo} source={require('../assets/img/hdfc.jpg')}></Image>
+          <View style={{flexDirection:'row',justifyContent:'space-around',marginTop:20}}>
+          {/* <Carousel
+                layout="default"
+                layoutCardOffset={9}
+                ref={isCarousel}
+                data={LOGO}
+                renderItem={CarouselBankLogo}
+                sliderWidth={SLIDER_WIDTH}
+                itemWidth={ITEM_WIDTH}
+                onSnapToItem={(index) => setIndex(index)}
+                useScrollView={true}
+              /> */}
+
+            <Image style={styles.banklogo} source={require('../assets/img/bajaj.jpg')}></Image>
             <Image style={styles.banklogo} source={require('../assets/img/sbi.png')}></Image>
             <Image style={styles.banklogo} source={require('../assets/img/ICICI.jpg')}></Image>
           </View>
           <View style={{flexDirection:'row',justifyContent:'space-around',marginTop:20}}>
-            <Image style={styles.banklogo} source={require('../assets/img/kotak.jpg')}></Image>
-            <Image style={styles.banklogo} source={require('../assets/img/tatacapital.jpg')}></Image>
+            <Image style={styles.banklogo} source={require('../assets/img/capri.jpg')}></Image>
             <Image style={styles.banklogo} source={require('../assets/img/axis.jpg')}></Image>
           </View>
        </View>
         </ScrollView>
-          
+        <FormModal modalLogin={modalLogin} setModalLogin={setModalLogin} navigation={navigation}/>
     </View>
   )
 }
@@ -143,36 +165,26 @@ export default Home
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor:'#f5f5f5'
+        backgroundColor:'#fff',
       },
       linearGradient: {
         borderBottomRightRadius: 35,
         borderBottomLeftRadius: 35,
         backgroundColor:colors.primary,
-
       },
-
       header:{
         flexDirection:'row',
-        // backgroundColor:colors.primary,
         width:'100%',
         borderBottomEndRadius:35,
         borderBottomLeftRadius:35,
-        padding:'6%',
-        height:105,
-        justifyContent:'space-between'
+        paddingHorizontal:'6%',
+        justifyContent:'space-between',
       },
       profile:{
-        backgroundColor:'#000',
-        width:65,
-        height:65,
-        borderWidth:1,
-        borderRadius:65,
-        color:'#fff',
-        textAlign:'center',
-        textAlignVertical:'center',
-        fontSize:30,
+        width:80,
+        height:80,
         marginRight:10,
+        alignSelf:'center'
       },
       bankcards:{
         width:320,
@@ -195,7 +207,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 2,
-        elevation:5,
+        // elevation:3,
         // minHeight:150
         
       },

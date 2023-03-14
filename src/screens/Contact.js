@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity,ActivityIndicator,SafeAreaView, Alert  } from 'react-native'
-import FTextInput from '../components/FTextInput'
+import ION from 'react-native-vector-icons/Ionicons'
 import  Button  from '../components/Button';
 import colors from '../constant/colors'
 import EvilIcons from 'react-native-vector-icons/AntDesign'
@@ -9,6 +9,7 @@ import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 import CustomInput from './CustomInput'
 import i18n from '../i18n';
+import FormModal from '../components/FormsModal';
 
 
 const signUpValidationSchema = yup.object().shape({
@@ -29,6 +30,8 @@ const signUpValidationSchema = yup.object().shape({
     .required(i18n.t('Address_is_required'))
 })
 const App = ({navigation}) => {
+
+  const [modalLogin, setModalLogin] = React.useState(false);
   const [loader, setLaoder] = useState(false)
   const createPost = (values)=> {
     setLaoder(true)
@@ -70,8 +73,11 @@ const App = ({navigation}) => {
                 <EvilIcons color="#fff" size={30} name='arrowleft'></EvilIcons>
             </TouchableOpacity>
           <Text style={{textAlign:'center',fontSize:25,color:'#fff',
-          fontFamily:'Poppins-SemiBold'}}>{i18n.t('Contact')}</Text>
-          <Text></Text> 
+          fontFamily:'Poppins-SemiBold'}}>{i18n.t('Home Loan')}</Text>
+           <TouchableOpacity onPress={()=>{setModalLogin(true)}}>
+                <ION name="menu" color="#fff" size={30} ></ION>
+            </TouchableOpacity>
+            
         </View>
         <View style={styles.contactForm}>
         <Formik
@@ -137,7 +143,8 @@ const App = ({navigation}) => {
             
         </View>
 
-  
+        <FormModal modalLogin={modalLogin} setModalLogin={setModalLogin} navigation={navigation}/>
+
       </SafeAreaView>
     </>
   )

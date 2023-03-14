@@ -26,14 +26,14 @@ const LoginPage = ({navigation}) => {
     if(phone.length == 10){
       setLoading(true)
       axios
-      .post('https://finedict.com:3003/sendSms'
+      .post('http://finedict.com:3000/sendSms'
       , {
         number:phone,
         otp:otp
       })
       .then(async(response) => {
         
-        if(response.data.Status == 'Success'){
+        if(response.data.status == 'success'){
           navigation.navigate('Otp',{number:phone,otp:otp})
         }else{
           console.log()
@@ -53,8 +53,6 @@ const LoginPage = ({navigation}) => {
     }else{
       Alert.alert('','Please enter valid phone number')
     }
-   
-
   }
   return (
     <View style={{flex:1,flexDirection:'column',backgroundColor:'#fff'}}>
@@ -63,7 +61,7 @@ const LoginPage = ({navigation}) => {
                 <Image
                 resizeMode="contain"
                     style={styles.logo}
-                    source={require('../assets/img/finedict-logo.png')}
+                    source={require('../assets/img/logo1.png')}
                 />
             </View>
 
@@ -82,13 +80,13 @@ const LoginPage = ({navigation}) => {
                       height:45,
                       borderRadius:5,
                       marginTop:20,flexDirection:'row',alignItems:'center',paddingHorizontal:10}}>
-                    <Text style={{fontFamily:'Poppins-Regular',color:'#aaa',fontSize:16}}>+91</Text>
+                    <Text style={{fontFamily:'Poppins-Regular',color:'#222',fontSize:16}}>+91</Text>
                     <Text style={{fontFamily:'Poppins-Regular',color:'#aaa',fontSize:25,paddingLeft:10,fontWeight:'400'}}>|</Text>
                     <TextInput
                       keyboardType = 'numeric'
                       onChangeText={setPhone}
                       maxLength={10}
-                      style={{width:'100%',marginLeft:10,fontFamily:'Poppins-Regular',color:'#aaa',fontSize:16,alignItems:'center'}}
+                      style={{width:'100%',marginLeft:10,fontFamily:'Poppins-Regular',color:'#222',fontSize:16,alignItems:'center'}}
                     />
                 </View>
                 <CircleButton  loading={loading} title={i18n.t('Get_OTP')}

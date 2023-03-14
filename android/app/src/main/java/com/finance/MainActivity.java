@@ -1,4 +1,4 @@
-package com.finance;
+package com.finedict.app;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

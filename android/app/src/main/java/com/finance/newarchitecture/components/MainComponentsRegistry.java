@@ -1,4 +1,4 @@
-package com.finance.newarchitecture.components;
+package com.finedict.app.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
